@@ -3,7 +3,6 @@ package au.org.ashley.data.store;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -58,7 +57,7 @@ public class CarModelInfoStore {
     Collection<CarModelInfo> modelInfoList;
 
     try {
-      modelInfoList = mapMakeModelYearToCar.get(pMake).get(pModel).get(pYear);
+      modelInfoList = Collections.unmodifiableCollection(mapMakeModelYearToCar.get(pMake).get(pModel).get(pYear));
     } catch (final NullPointerException exception) {
       // It is safe to assume the standard Java libraries work.
 
