@@ -71,6 +71,7 @@ class TestCarStore {
    */
   @Test
   void testModelStore() throws IOException, CarModelStoreException {
+    System.out.println("\nTEST METHOD: testModelStore()");
     final CarModelInfoStore modelStore = createModelStore();
 
     System.out.println("\nMODEL 1: ");
@@ -98,6 +99,7 @@ class TestCarStore {
    */
   @Test
   void testCarStoreByReg() throws IOException, CarStoreException, CarModelStoreException {
+    System.out.println("\nTEST METHOD: testCarStoreByReg()");
     final CarStore carStore = createCarStore(createModelStore());
 
     System.out.println("\nCAR 1: " + CAR_REGISTRATION_FIRST);
@@ -126,6 +128,7 @@ class TestCarStore {
    */
   @Test
   void testCarStoreByModelInfo() throws IOException, CarModelStoreException, NumberFormatException, CarStoreException {
+    System.out.println("\nTEST METHOD: testCarStoreByModelInfo()");
     final Car car = createCarStore(createModelStore()).get(CAR_MAKE_FIRST, CAR_MODEL_FIRST, CAR_YEAR_FIRST).iterator()
         .next();
 
