@@ -63,6 +63,14 @@ class TestCarStore {
   private static final String CAR_REGISTRATION_MID = "LMN123";
   private static final String CAR_REGISTRATION_LAST = "LMN173";
 
+  private static final String[] CAR_REGISTRATION_MID_MATCH_LIST = {
+      "ABC138",
+      "XYZ147",
+      "XYZ148",
+      "LMN123",
+      "LMN124",
+  };
+
   /**
    * Demonstrates retrieving car model information from the car model store.
    *
@@ -129,16 +137,18 @@ class TestCarStore {
   @Test
   void testCarStoreByModelInfo() throws IOException, CarModelStoreException, NumberFormatException, CarStoreException {
     System.out.println("\nTEST METHOD: testCarStoreByModelInfo()");
-    final Car car = createCarStore(createModelStore()).get(CAR_MAKE_FIRST, CAR_MODEL_FIRST, CAR_YEAR_FIRST).iterator()
-        .next();
-
     System.out.println("\nCAR PARAMETERS:");
-    System.out.println("MAKE: " + CAR_MAKE_FIRST);
-    System.out.println("MODEL: " + CAR_MODEL_FIRST);
-    System.out.println("YEAR: " + CAR_YEAR_FIRST);
-    System.out.println("REGISTRATION FOUND: " + car.getRegistration());
+    System.out.println("MAKE: " + CAR_MAKE_MID);
+    System.out.println("MODEL: " + CAR_MODEL_MID);
+    System.out.println("YEAR: " + CAR_YEAR_MID + "\n");
 
-    Assert.assertEquals(CAR_REGISTRATION_FIRST, car.getRegistration());
+    int i = 0;
+
+    for (Car car : createCarStore(createModelStore()).get(CAR_MAKE_MID, CAR_MODEL_MID, CAR_YEAR_MID)) {
+      System.out.println("REGISTRATION FOUND: " + car.getRegistration());
+      Assert.assertEquals(CAR_REGISTRATION_MID_MATCH_LIST[i++], car.getRegistration());
+    }
+
   }
 
   private static CarModelInfoStore createModelStore() throws IOException, CarModelStoreException {

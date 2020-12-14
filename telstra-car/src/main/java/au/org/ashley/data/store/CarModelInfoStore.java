@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Map;
-import java.util.Set;
 
 import au.org.ashley.data.model.CarModelInfo;
 
@@ -14,7 +14,7 @@ import au.org.ashley.data.model.CarModelInfo;
  */
 public class CarModelInfoStore {
   private final Map<Integer, CarModelInfo> mapIDToModelInfo = new HashMap<>();
-  private final Map<String, Map<String, Map<Short, Set<CarModelInfo>>>> mapMakeModelYearToCar = new HashMap<>();
+  private final Map<String, Map<String, Map<Short, Collection<CarModelInfo>>>> mapMakeModelYearToCar = new HashMap<>();
 
   /**
    * Adds a car model's information to the store.
@@ -33,7 +33,7 @@ public class CarModelInfoStore {
 
     mapMakeModelYearToCar.computeIfAbsent(pModelInfo.getMake(), key -> new HashMap<>())
         .computeIfAbsent(pModelInfo.getModel(), key -> new HashMap<>())
-        .computeIfAbsent(pModelInfo.getYear(), key -> new HashSet<>()).add(pModelInfo);
+        .computeIfAbsent(pModelInfo.getYear(), key -> new LinkedList<>()).add(pModelInfo);
   }
 
   /**
