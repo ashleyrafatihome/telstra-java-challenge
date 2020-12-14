@@ -1,20 +1,9 @@
 # telstra-java-challenge
 
-## Scenario 
+1. My interpretation of the requirement was that it was for a library that could be built into a jar for inclusion in
+another program. I therefore did not make a runnable standalone jar.
 
-Using the sample data “cars.zip” create a simple, resuable Java library that: 
+2. Since there is no UI, the library can be demonstrated by running the class TestCarStore as a JUnit test. This is not
+a set of comprehensive unit tests, which the spec did not call for, but demonstration of the code.
 
- 
-- pre-loads the give data records 
-- allows new data records to be added 
-- allows data to be retrieved by registration  
-- allows data to be retrieved to a combination of make/model/year (all 3 mandatory) 
-
-## Requirements 
-
-- Use only core-Java – no imported libraries 
-- Assume that your library will be used within a server environment 
-- Consider that the dataset could grow very large (for the sake of this exercise you can assume that memory is unlimited) 
-- Use code comments to explain your design decisions 
-- Ensure appropriate best practices are employed  
-- Clone this repository then upload your work to your own github, providing the HR team with a link
+3. If the code is built into a jar using Maven, output is put in the telstra-car\target directory.
