@@ -4,7 +4,10 @@ package au.org.ashley.data.model;
  * The properties of a car.
  */
 public enum EnumCarProperty {
-  ID("ID"), YEAR("Identification.Year"), MAKE("Identification.Make"), MODEL("Indentification.Model");
+  ID("ID"),
+  YEAR("Identification.Year"),
+  MAKE("Identification.Make"),
+  MODEL("Indentification.Model");
 
   private final String name;
 
