@@ -13,11 +13,11 @@ public class CarModelInfo implements Iterable<CarProperty> {
 
   /**
    * Constructor.
-   * 
+   *
    * @param pMapPropertyToIndex maps a property to its index.
    * @param pPropertyList the list of properties of this model.
    */
-  public CarModelInfo(Map<String, Integer> pMapPropertyToIndex, String[] pPropertyList) {
+  public CarModelInfo(final Map<String, Integer> pMapPropertyToIndex, final String[] pPropertyList) {
     mapPropertyToIndex = pMapPropertyToIndex;
     propertyList = pPropertyList;
   }
@@ -34,7 +34,7 @@ public class CarModelInfo implements Iterable<CarProperty> {
 
       @Override
       public CarProperty next() {
-        Entry<String, Integer> entry = iterator.next();
+        final Entry<String, Integer> entry = iterator.next();
 
         return new CarProperty(entry.getKey(), propertyList[entry.getValue()]);
       }
@@ -43,7 +43,7 @@ public class CarModelInfo implements Iterable<CarProperty> {
 
   /**
    * Gets the ID.
-   * 
+   *
    * @return the ID.
    */
   public int getID() {
@@ -52,7 +52,7 @@ public class CarModelInfo implements Iterable<CarProperty> {
 
   /**
    * Gets the year of manufacture.
-   * 
+   *
    * @return the year.
    */
   public short getYear() {
@@ -61,7 +61,7 @@ public class CarModelInfo implements Iterable<CarProperty> {
 
   /**
    * Gets the make.
-   * 
+   *
    * @return the make.
    */
   public String getMake() {
@@ -70,7 +70,7 @@ public class CarModelInfo implements Iterable<CarProperty> {
 
   /**
    * Gets the model.
-   * 
+   *
    * @return the model.
    */
   public String getModel() {
@@ -79,21 +79,21 @@ public class CarModelInfo implements Iterable<CarProperty> {
 
   /**
    * Gets the specified property value.
-   * 
+   *
    * @param aProperty the property.
    * @return the value.
    */
-  public String getProperty(EnumCarProperty aProperty) {
+  public String getProperty(final EnumCarProperty aProperty) {
     return getProperty(aProperty.getName());
   }
 
   /**
    * Gets the specified property value.
-   * 
+   *
    * @param aProperty the property.
    * @return the value.
    */
-  public String getProperty(String aProperty) {
+  public String getProperty(final String aProperty) {
     return propertyList[mapPropertyToIndex.get(aProperty)];
   }
 }

@@ -5,10 +5,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import au.org.ashley.data.model.Car;
 import au.org.ashley.data.model.CarModelInfo;
 import au.org.ashley.data.store.CarModelInfoStore;
+import au.org.ashley.data.store.CarModelStoreException;
 import au.org.ashley.data.store.CarStore;
+import au.org.ashley.data.store.CarStoreException;
 
 /**
  * Contains utility methods for reading car data.
@@ -18,25 +19,27 @@ public class CarReaderUtil {
   private static final int INDEX_MODEL_NUM = 1;
 
   /**
-   * Extracts car model information.
-   * 
+   * Extracts car model information into a store.
+   *
    * @param pReader the reader containing the information.
    * @return the map of car model numbers to car models.
    * @throws IOException if an error occurred.
+   * @throws CarModelStoreException thrown if an error occurs.
    */
-  public static CarModelInfoStore extractCarModels(BufferedReader pReader) throws IOException {
+  public static CarModelInfoStore extractCarModels(final BufferedReader pReader)
+      throws IOException, CarModelStoreException {
     int i = 0;
-    Map<String, Integer> mapPropertyToIndex = new HashMap<>();
+    final Map<String, Integer> mapPropertyToIndex = new HashMap<>();
 
-    for (String property : pReader.readLine().split(",")) {
+    for (final String property : pReader.readLine().split(",")) {
       mapPropertyToIndex.put(property, i++);
     }
 
-    CarModelInfoStore modelStore = new CarModelInfoStore();
+    final CarModelInfoStore modelStore = new CarModelInfoStore();
     String line;
 
     while ((line = pReader.readLine()) != null) {
-      CarModelInfo model = new CarModelInfo(mapPropertyToIndex, line.split(","));
+      final CarModelInfo model = new CarModelInfo(mapPropertyToIndex, line.split(","));
       modelStore.add(model);
     }
 
@@ -44,25 +47,24 @@ public class CarReaderUtil {
   }
 
   /**
-   * Extracts individual car information.
-   * 
+   * Extracts individual car information into a store.
+   *
    * @param pModelStore the store of car model information.
    * @param pReader the reader containing the information.
    * @return the store of cars.
-   * @throws IOException
+   * @throws IOException thrown if an error occurs.
+   * @throws CarStoreException thrown if an error occurs.
    */
-  public static CarStore extractCarStore(CarModelInfoStore pModelStore, BufferedReader pReader) throws IOException {
+  public static CarStore extractCarStore(final CarModelInfoStore pModelStore, final BufferedReader pReader)
+      throws IOException, NumberFormatException, CarStoreException {
     pReader.readLine();
 
-    CarStore store = new CarStore();
+    final CarStore store = new CarStore(pModelStore);
     String line;
 
     while ((line = pReader.readLine()) != null) {
-      String[] params = line.split(",");
-      int modelID = Integer.parseInt(params[INDEX_MODEL_NUM]);
-      Car car = new Car(params[INDEX_REGISTRATION], pModelStore.get(modelID));
-
-      store.add(car);
+      final String[] params = line.split(",");
+      store.add(params[INDEX_REGISTRATION], Integer.parseInt(params[INDEX_MODEL_NUM]));
     }
 
     return store;

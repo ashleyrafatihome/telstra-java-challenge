@@ -9,18 +9,18 @@ public class CarProperty {
 
   /**
    * Constructor.
-   * 
+   *
    * @param pName the name.
    * @param pValue the value.
    */
-  public CarProperty(String pName, String pValue) {
+  public CarProperty(final String pName, final String pValue) {
     name = pName;
     value = pValue;
   }
 
   /**
    * The name.
-   * 
+   *
    * @return the name.
    */
   public String getName() {
@@ -29,7 +29,7 @@ public class CarProperty {
 
   /**
    * The value.
-   * 
+   *
    * @return the value.
    */
   public String getValue() {

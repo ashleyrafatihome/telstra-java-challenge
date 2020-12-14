@@ -18,16 +18,17 @@ public class CarModelInfoStore {
 
   /**
    * Adds a car model's information to the store.
-   * 
+   *
    * @param pModelInfo the information.
+   * @throws CarModelStoreException thrown if an error occurs.
    */
-  public void add(CarModelInfo pModelInfo) {
-    int id = pModelInfo.getID();
+  public void add(final CarModelInfo pModelInfo) throws CarModelStoreException {
+    final int id = pModelInfo.getID();
 
     if (mapIDToModelInfo.put(id, pModelInfo) != null) {
       // The spec does not mention updating records, which would add complexity, hence this is not handled.
 
-      throw new RuntimeException("Error: Duplicate model ID: " + id);
+      throw new CarModelStoreException("Error: Duplicate model ID: " + id);
     }
 
     mapMakeModelYearToCar.computeIfAbsent(pModelInfo.getMake(), key -> new HashMap<>())
@@ -37,28 +38,28 @@ public class CarModelInfoStore {
 
   /**
    * Gets the car model information.
-   * 
+   *
    * @param pID the model ID.
    * @return the information.
    */
-  public CarModelInfo get(int pID) {
+  public CarModelInfo get(final int pID) {
     return mapIDToModelInfo.get(pID);
   }
 
   /**
    * Gets the car models with the specified parameters.
-   * 
+   *
    * @param pMake the make.
    * @param pModel the model.
    * @param pYear the year.
    * @return the cars.
    */
-  public Collection<CarModelInfo> get(String pMake, String pModel, Short pYear) {
+  public Collection<CarModelInfo> get(final String pMake, final String pModel, final Short pYear) {
     Collection<CarModelInfo> modelInfoList;
 
     try {
       modelInfoList = mapMakeModelYearToCar.get(pMake).get(pModel).get(pYear);
-    } catch (NullPointerException exception) {
+    } catch (final NullPointerException exception) {
       // It is safe to assume the standard Java libraries work.
 
       modelInfoList = Collections.emptyList();

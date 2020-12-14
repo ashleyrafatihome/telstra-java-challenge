@@ -9,11 +9,11 @@ public class Car {
 
   /**
    * Constructor.
-   * 
+   *
    * @param pRegistration the registration.
    * @param pModel the model.
    */
-  public Car(String pRegistration, CarModelInfo pModel) {
+  public Car(final String pRegistration, final CarModelInfo pModel) {
     registration = pRegistration;
     modelInfo = pModel;
   }
@@ -24,13 +24,13 @@ public class Car {
   }
 
   @Override
-  public boolean equals(Object pObject) {
+  public boolean equals(final Object pObject) {
     return pObject instanceof Car && registration.equals(((Car) pObject).getRegistration());
   }
 
   /**
    * Gets the registration.
-   * 
+   *
    * @return the registration.
    */
   public String getRegistration() {
@@ -39,7 +39,7 @@ public class Car {
 
   /**
    * Gets the car model info.
-   * 
+   *
    * @return the model info.
    */
   public CarModelInfo getModelInfo() {
