@@ -18,16 +18,6 @@ public class Car {
     modelInfo = pModel;
   }
 
-  @Override
-  public int hashCode() {
-    return getRegistration().hashCode();
-  }
-
-  @Override
-  public boolean equals(final Object pObject) {
-    return pObject instanceof Car && registration.equals(((Car) pObject).getRegistration());
-  }
-
   /**
    * Gets the registration.
    *
